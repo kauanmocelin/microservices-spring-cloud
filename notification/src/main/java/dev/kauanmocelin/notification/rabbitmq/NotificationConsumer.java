@@ -16,6 +16,9 @@ public class NotificationConsumer {
 
     @RabbitListener(queues = "${rabbitmq.queues.notification}")
     public void consumer(NotificationRequest notificationRequest) {
+        /* simulate fail on message consume process
+        log.info("try to process message {}", notificationRequest.message());
+        throw new RuntimeException();*/
         log.info("Consumed {} from queue", notificationRequest);
         notificationService.send(notificationRequest);
     }
